@@ -1,21 +1,9 @@
-const buttonsContainer = document.getElementById('buttons');
-const display = document.getElementById('display');
-const calcBox = document.getElementById('calculator');
-const infoButton = document.getElementById('infoButton');
-const infoPopup = document.getElementById('infoPopup');
-const closeInfo = document.getElementById('closeInfo');
+let globalSpeedMultiplier = 1.05;  // Reduced initial speed boost
 
-const values = ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '=', '+', 'C'];
-const boxWidth = calcBox.clientWidth - 60;
-const boxHeight = buttonsContainer.clientHeight - 60;
-
-let buttonClicks = {};
-let globalSpeedMultiplier = 1.2;  // Even faster initial movement
-
-// CHAOS: Every 5 seconds, increase global speed
+// CHAOS: Every 5 seconds, increase global speed (slower growth)
 setInterval(() => {
-    globalSpeedMultiplier *= 1.1;
-    if (globalSpeedMultiplier > 4) globalSpeedMultiplier = 4;  // Limit speed to avoid breaking physics
+    globalSpeedMultiplier *= 1.05; // Slower increase over time
+    if (globalSpeedMultiplier > 3) globalSpeedMultiplier = 3;  // Lower max speed cap
 }, 5000);
 
 // Function to create buttons
@@ -29,8 +17,8 @@ function createButtons() {
         btn.style.top = `${position.y}px`;
         btn.style.left = `${position.x}px`;
 
-        let speedX = (Math.random() * 3 + 2) * globalSpeedMultiplier; // Increased base speed
-        let speedY = (Math.random() * 3 + 2) * globalSpeedMultiplier;
+        let speedX = (Math.random() * 2 + 1.5) * globalSpeedMultiplier; // Slower base speed
+        let speedY = (Math.random() * 2 + 1.5) * globalSpeedMultiplier;
 
         buttonClicks[val] = 0;
 
@@ -48,9 +36,9 @@ function createButtons() {
         }
         moveButton();
 
-        // CHAOS: Hover causes violent deflection and speed boost
+        // Adjust hover effect to be less aggressive
         btn.addEventListener('mouseenter', (event) => {
-            globalSpeedMultiplier *= 1.2; // Global speed boost
+            globalSpeedMultiplier *= 1.1; // Slower boost
 
             let rect = btn.getBoundingClientRect();
             let centerX = rect.left + rect.width / 2;
@@ -60,16 +48,16 @@ function createButtons() {
 
             let angle = Math.atan2(centerY - mouseY, centerX - mouseX);
 
-            btn.style.transform = `rotate(${angle * (180 / Math.PI)}deg) scale(1.5)`;
+            btn.style.transform = `rotate(${angle * (180 / Math.PI)}deg) scale(1.3)`;
 
-            speedX += Math.cos(angle) * 4; // Stronger deflection
-            speedY += Math.sin(angle) * 4;
+            speedX += Math.cos(angle) * 2.5; // Weaker deflection
+            speedY += Math.sin(angle) * 2.5;
 
-            if (Math.random() > 0.5) speedX *= -1; // Random chance to flip direction
+            if (Math.random() > 0.5) speedX *= -1;
             if (Math.random() > 0.5) speedY *= -1;
         });
 
-        // Button click logic
+        // Adjust button slowdown on click
         btn.addEventListener('click', () => {
             buttonClicks[val]++;
 
@@ -79,8 +67,8 @@ function createButtons() {
                 btn.style.background = 'yellow';
             } else if (buttonClicks[val] === 3) {
                 btn.style.background = 'lime';
-                speedX *= 0.2;
-                speedY *= 0.2;
+                speedX *= 0.3; // Slower speed drop
+                speedY *= 0.3;
             }
 
             if (buttonClicks[val] >= 3) {
@@ -101,14 +89,5 @@ function createButtons() {
         buttonsContainer.appendChild(btn);
     });
 }
-
-// Info button logic
-infoButton.addEventListener('click', () => {
-    infoPopup.style.display = infoPopup.style.display === 'block' ? 'none' : 'block';
-});
-
-closeInfo.addEventListener('click', () => {
-    infoPopup.style.display = 'none';
-});
 
 createButtons();
