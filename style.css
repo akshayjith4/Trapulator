@@ -1,0 +1,114 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 2rem;
+    position: relative;
+    animation: glitch 0.8s infinite;
+}
+
+/* Faster Glitch Effect */
+@keyframes glitch {
+    0%, 100% { transform: skewX(0deg); }
+    20% { transform: skewX(12deg); }
+    40% { transform: skewX(-12deg); }
+    60% { transform: skewX(6deg); }
+    80% { transform: skewX(-6deg); }
+}
+
+#calculator {
+    width: 400px;
+    height: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 4px solid white;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#display {
+    width: 90%;
+    font-size: 1.8rem;
+    padding: 12px;
+    text-align: right;
+    background: black;
+    color: lime;
+    border: 4px solid lime;
+    box-shadow: 0 0 15px lime;
+    margin-bottom: 12px;
+}
+
+#buttons {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Keeps buttons below the display */
+}
+
+/* CHAOTIC BUTTONS */
+button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    transition: transform 0.05s ease-in-out, background 0.1s ease-in-out;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 10px red;
+}
+
+/* Make them even harder to catch */
+button:hover {
+    transform: scale(1.5);
+}
+
+/* Floating Info Button */
+#infoButton {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px;
+    background: white;
+    color: black;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 5px white;
+}
+
+#infoPopup {
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+    width: 220px;
+    box-shadow: 0 0 10px white;
+}
+
+#closeInfo {
+    display: block;
+    margin-top: 10px;
+    padding: 5px;
+    background: red;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}

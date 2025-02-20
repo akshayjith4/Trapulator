@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totally Normal Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="glitch">Totally Normal Calculator</h1>
+    
+    <button id="infoButton">ℹ️</button>
+    <div id="infoPopup">
+        <p>Rules of the Game:</p>
+        <ul>
+            <li>🔴 Buttons move randomly.</li>
+            <li>🟠 Clicking changes color (Orange → Yellow → Green).</li>
+            <li>✅ After 3 clicks, the button becomes usable.</li>
+            <li>💀 Some buttons are fake and will disappear!</li>
+            <li>⚡ Fast clicks slow down all buttons temporarily.</li>
+        </ul>
+        <button id="closeInfo">Close</button>
+    </div>
+
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        <div id="buttons"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
