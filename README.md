@@ -27,9 +27,9 @@ https://akshayjith4.github.io/Trapulator/
 
 ## 🛠️ Installation (For Local Hosting)  
 Want to run it on your local machine? Use Python’s built-in server:  
-```sh
+
 git clone https://github.com/akshayjith4/Trapulator.git
-cd Trapulator
+
 python -m http.server 8000
 🤝 Contributing
 Feel free to submit issues and pull requests! Let’s make this madness even wilder.
